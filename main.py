@@ -2,9 +2,7 @@ import pygame
 from func import *
 
 pygame.init()
-board = [["X", "O", "N"], 
-        ["X", "O", "N"], 
-        ["N", "X", "O"]]
+board = init_board()
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
