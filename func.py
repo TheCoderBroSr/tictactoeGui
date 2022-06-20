@@ -2,7 +2,7 @@ import sys
 import pygame
 
 pygame.font.init()
-PAWN = pygame.font.SysFont('Comic Sans Ms', 150)
+MARKER = pygame.font.SysFont('Comic Sans Ms', 150)
 
 def end():
     pygame.quit()
@@ -35,5 +35,5 @@ def display_board(board, color, surf):
             if val=="N":
                 continue
 
-            val = PAWN.render(val, 1, color)
+            val = MARKER.render(val, 1, color)
             surf.blit(val, (gap*j - (val.get_width()//2) + (gap//2), gap*i - (val.get_height()//2) + (gap//2)))
