@@ -2,7 +2,7 @@ import sys
 import pygame
 
 pygame.font.init()
-PAWN = pygame.font.SysFont('Arial', 150)
+PAWN = pygame.font.SysFont('Comic Sans Ms', 150)
 
 def end():
     pygame.quit()
