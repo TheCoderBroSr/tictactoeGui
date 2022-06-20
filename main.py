@@ -1,5 +1,5 @@
 import pygame
-import func
+from func import *
 
 pygame.init()
 
