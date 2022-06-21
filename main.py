@@ -23,6 +23,9 @@ while True:
             if event.key == pygame.K_q:
                 end()
 
+        if event.type == pygame.MOUSEBUTTONUP:
+            print("pressed", gridCoordinates(event.pos, WIN))
+
     WIN.fill(BLACK)
     display_board(board, BLUE, WIN)
 

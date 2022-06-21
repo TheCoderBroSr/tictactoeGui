@@ -11,6 +11,12 @@ def end():
 def init_board():
     return [["N"]*3]*3
 
+def gridCoordinates(pos, surf):
+    x, y = pos
+    gap = surf.get_height()//3
+
+    return (x//gap, y//gap)
+
 def draw_bars(bars, color, surf):
     for bar in bars:
         pygame.draw.rect(surf, color, bar)
