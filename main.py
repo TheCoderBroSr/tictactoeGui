@@ -14,6 +14,7 @@ clock = pygame.time.Clock()
 BLACK = (5, 0, 20)
 BLUE = (10, 23, 123)
 
+MARKER = "X"
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -28,9 +29,12 @@ while True:
             i, j = gridCoordinates(mouse_pos, WIN)
 
             if board[i][j] == " ":
-                board[i][j] = "X"
+                board[i][j] = MARKER
 
-            print(board)
+                if MARKER == "X":
+                    MARKER = "O"
+                else:
+                    MARKER = "X"
 
     WIN.fill(BLACK)
     display_board(board, BLUE, WIN)
