@@ -23,8 +23,14 @@ while True:
             if event.key == pygame.K_q:
                 end()
 
-        if event.type == pygame.MOUSEBUTTONUP:
-            print("pressed", gridCoordinates(event.pos, WIN))
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = event.pos
+            i, j = gridCoordinates(mouse_pos, WIN)
+
+            if board[i][j] == " ":
+                board[i][j] = "X"
+
+            print(board)
 
     WIN.fill(BLACK)
     display_board(board, BLUE, WIN)

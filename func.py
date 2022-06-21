@@ -9,13 +9,15 @@ def end():
     sys.exit()
 
 def init_board():
-    return [["N"]*3]*3
+    return [[" ", " ", " "],
+            [" ", " ", " "],
+            [" ", " ", " "]]
 
 def gridCoordinates(pos, surf):
     x, y = pos
     gap = surf.get_height()//3
 
-    return (x//gap, y//gap)
+    return (y//gap, x//gap) #Flipped due to pygame's coordinate system
 
 def draw_bars(bars, color, surf):
     for bar in bars:
@@ -38,7 +40,7 @@ def display_board(board, color, surf):
         for j in range(len(board[i])):
             val = board[i][j]
 
-            if val=="N":
+            if val==" ":
                 continue
 
             val = MARKER.render(val, 1, color)
