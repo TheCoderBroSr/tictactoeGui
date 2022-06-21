@@ -11,8 +11,9 @@ pygame.display.set_caption(("TicTacToe GUI"))
 FPS = 30
 clock = pygame.time.Clock()
 
-BLACK = (5, 0, 20)
+BLACK = (10, 4, 20)
 BLUE = (10, 23, 123)
+RED = (43, 23, 100)
 
 MARKER = "X"
 while True:
@@ -37,7 +38,7 @@ while True:
                     MARKER = "X"
 
     WIN.fill(BLACK)
-    display_board(board, BLUE, WIN)
+    display_board(board, [(RED, BLUE), BLUE], WIN)
 
     pygame.display.update()
     clock.tick(FPS)
