@@ -5,11 +5,14 @@ pygame.init()
 board = init_board()
 
 SCREEN_WIDTH = 600
-SCREEN_HEIGHT = 600
+SCREEN_HEIGHT = SCREEN_WIDTH
 WIN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption(("TicTacToe GUI"))
 FPS = 30
 clock = pygame.time.Clock()
+
+MARKER_SIZE = SCREEN_WIDTH//4
+MARKER_FONT = pygame.font.SysFont('Comic Sans Ms', MARKER_SIZE)
 
 BLACK = (10, 4, 20)
 BLUE = (10, 23, 123)
@@ -38,7 +41,7 @@ while True:
                     MARKER = "X"
 
     WIN.fill(BLACK)
-    display_board(board, [(RED, BLUE), BLUE], WIN)
+    display_board(board, [(RED, BLUE), BLUE], MARKER_FONT, WIN)
 
     pygame.display.update()
     clock.tick(FPS)

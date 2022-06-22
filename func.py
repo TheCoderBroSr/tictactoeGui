@@ -2,7 +2,6 @@ import sys
 import pygame
 
 pygame.font.init()
-MARKER = pygame.font.SysFont('Comic Sans Ms', 150)
 
 def end():
     pygame.quit()
@@ -23,15 +22,16 @@ def draw_bars(bars, color, surf):
     for bar in bars:
         pygame.draw.rect(surf, color, bar)
 
-def display_board(board, color, surf):
+def display_board(board, color, MARKER, surf):
     #color is a list, where in first index is the colors of the markers,
     #and in second is the color of the bars
     height, width = surf.get_height(), surf.get_width() #Getting height and width of surface
 
-    gap = height//3 #Getting the gap in the grid
+    gap = height/3 #Getting the gap in the grid
+    bar_thickness = int((1/60) * height)
 
-    horizontal_bars = [pygame.Rect(i*gap, 0, 10, height) for i in range(1, 3)] #Getting horizontal bars of the grid
-    vertical_bars = [pygame.Rect(0, i*gap, width, 10) for i in range(1, 3)] #Getting vertical bars of the grid
+    horizontal_bars = [pygame.Rect(int(i*gap), 0, bar_thickness, height) for i in range(1, 3)] #Getting horizontal bars of the grid
+    vertical_bars = [pygame.Rect(0, int(i*gap), width, bar_thickness) for i in range(1, 3)] #Getting vertical bars of the grid
 
     #Drawing individual bar of each type
     draw_bars(horizontal_bars, color[1], surf)
