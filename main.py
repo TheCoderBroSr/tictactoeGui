@@ -1,9 +1,11 @@
+from telnetlib import GA
 import pygame
 from func import *
 
 pygame.init()
 board = init_board()
 
+GAME_LOOP = True
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = SCREEN_WIDTH
 WIN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -19,7 +21,7 @@ BLUE = (10, 23, 123)
 RED = (43, 23, 100)
 
 MARKER = "X"
-while True:
+while GAME_LOOP:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             end()
@@ -40,10 +42,18 @@ while True:
                 else:
                     MARKER = "X"
 
+            w_check = win_check(board, ["X", "O"])
+            print(w_check)
+            if w_check == -1:
+                if is_board_full(board):
+                    print("Tie")
+                    GAME_LOOP = False
+            else:
+                print(f"{w_check} WON!!!")
+                GAME_LOOP = False
+
     WIN.fill(BLACK)
     display_board(board, [(RED, BLUE), BLUE], MARKER_FONT, WIN)
-
-    print(win_check(board, ["X", "O"]), board)
 
     pygame.display.update()
     clock.tick(FPS)
