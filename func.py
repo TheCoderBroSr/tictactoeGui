@@ -18,6 +18,28 @@ def gridCoordinates(pos, surf):
 
     return (y//gap, x//gap) #Flipped due to pygame's coordinate system
 
+def win_check(board, markers):
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+
+            if board[i][j] in markers:
+                #Horizontal check
+                if board[i] == [board[i][j]]*3:
+                    return board[i][j]
+
+                #Vertical check
+                elif [board[z][i] for z in range(len(board[i]))] == [board[i][j]]*3:
+                    return board[i][j]
+
+                #Diagonal check
+                elif ([board[z][z] for z in range(len(board[i]))] == [board[i][j]]*3) or ([board[z][len(board[i])-z-1] for z in range(len(board[i]))] == [board[i][j]]*3):
+                    return board[i][j]
+
+                else:
+                    return -1
+            else:
+                return -1
+
 def draw_bars(bars, color, surf):
     for bar in bars:
         pygame.draw.rect(surf, color, bar)

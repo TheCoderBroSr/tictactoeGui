@@ -43,6 +43,8 @@ while True:
     WIN.fill(BLACK)
     display_board(board, [(RED, BLUE), BLUE], MARKER_FONT, WIN)
 
+    print(win_check(board, ["X", "O"]), board)
+
     pygame.display.update()
     clock.tick(FPS)
         
