@@ -43,7 +43,7 @@ while GAME_LOOP:
                     MARKER = "X"
 
             w_check = win_check(board, ["X", "O"])
-            print(w_check)
+
             if w_check == -1:
                 if is_board_full(board):
                     print("Tie")
