@@ -28,24 +28,28 @@ def is_board_full(board):
     return full == len(board[0])
 
 def win_check(board, markers):
+    winning_sequence = ([markers[0]]*3, [markers[1]]*3)
+
     for i in range(len(board)):
-        #Horizontal check
-        if board[i] in ([markers[0]]*3, [markers[1]]*3):
-            return board[i][0]
+        #horizontal check
+        if board[i] in winning_sequence:
+            return board[i][0] #return first element in that row
 
-        #Vertical check
-        elif [board[z][i] for z in range(len(board[i]))] in ([markers[0]]*3, [markers[1]]*3):
-            return board[i][0]
+        #vertical check
+        col = [board[x][i] for x in range(len(board[i]))] #Get a column
+        if col in winning_sequence:
+            return col[0] #return first element in that column
 
-        #Diagonal check
-        elif ([board[z][z] for z in range(len(board[i]))] in ([markers[0]]*3, [markers[1]]*3)):
-            return board[i][i]
-        
-        elif ([board[z][len(board[i])-z-1] for z in range(len(board[i]))] in ([markers[0]]*3, [markers[1]]*3)):
-            return board[i][len(board) - i - 1]
+    #diagonal check
+    diag1 = [board[x][x] for x in range(len(board))]
+    diag2 = [board[y][abs(len(board) - y - 1)] for y in range(len(board))]
 
-        else:
-            return -1
+    if diag1 in winning_sequence:
+        return diag1[0]
+
+    if diag2 in winning_sequence:
+        return diag2[0]
+
     return -1
 
 def draw_bars(bars, color, surf):
