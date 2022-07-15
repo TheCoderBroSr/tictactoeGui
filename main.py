@@ -13,13 +13,15 @@ FPS = 30
 clock = pygame.time.Clock()
 
 MARKER_SIZE = SCREEN_WIDTH//4
-MARKER_FONT = pygame.font.SysFont('Comic Sans Ms', MARKER_SIZE)
+MARKER_FONT = pygame.font.SysFont('Arial', MARKER_SIZE)
 
 BLACK = (10, 4, 20)
-BLUE = (10, 23, 123)
-RED = (43, 23, 100)
+GREY = (35, 10, 55)
+BLUE = (75, 23, 103)
+RED = (103, 23, 55)
 
 MARKER = "X"
+GAME_WON = 0
 while GAME_LOOP:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -31,7 +33,7 @@ while GAME_LOOP:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = event.pos
-            i, j = gridCoordinates(mouse_pos, WIN)
+            i, j = boardCoordinates(mouse_pos)
 
             if board[i][j] == " ":
                 board[i][j] = MARKER
@@ -41,19 +43,27 @@ while GAME_LOOP:
                 else:
                     MARKER = "X"
 
-            w_check = win_check(board, ["X", "O"])
+            w_marker, *w_pos = win_check(board, ["X", "O"])
 
-            if w_check == -1:
+            if w_marker == -1:
                 if is_board_full(board):
                     print("Tie")
-                    GAME_LOOP = False
+                    GAME_WON = 2
             else:
-                print(f"{w_check} WON!!!")
-                GAME_LOOP = False
+                w_pos = list(map(displayCoordinates, w_pos))
+                GAME_WON = 1
+                print(f"{w_marker} WON!!!")
 
     WIN.fill(BLACK)
-    display_board(board, [(RED, BLUE), BLUE], MARKER_FONT, WIN)
+    display_board(board, [(RED, BLUE), GREY], MARKER_FONT, WIN)
+
+    if GAME_WON == 1:
+        draw_line(WIN, [RED, BLUE][MARKER=="X"], w_pos, 15)
+        GAME_WON = 2
 
     pygame.display.update()
     clock.tick(FPS)
         
+    if GAME_WON == 2:
+        pygame.time.delay(2000)
+        GAME_LOOP = False
