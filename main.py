@@ -21,7 +21,8 @@ BLUE = (75, 23, 103)
 RED = (103, 23, 55)
 
 MARKER = "X"
-GAME_WON = 0
+GAME_END = -1 #-1 -> Game not end, 1 -> Game has been won/tie, 2 -> Init Game End Sequence
+
 while GAME_LOOP:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -48,22 +49,22 @@ while GAME_LOOP:
             if w_marker == -1:
                 if is_board_full(board):
                     print("Tie")
-                    GAME_WON = 2
+                    GAME_END = 2
             else:
                 w_pos = list(map(displayCoordinates, w_pos))
-                GAME_WON = 1
+                GAME_END = 1
                 print(f"{w_marker} WON!!!")
 
     WIN.fill(BLACK)
     display_board(board, [(RED, BLUE), GREY], MARKER_FONT, WIN)
 
-    if GAME_WON == 1:
+    if GAME_END == 1:
         draw_line(WIN, [RED, BLUE][MARKER=="X"], w_pos, 15)
-        GAME_WON = 2
+        GAME_END = 2
 
     pygame.display.update()
     clock.tick(FPS)
         
-    if GAME_WON == 2:
+    if GAME_END == 2:
         pygame.time.delay(2000)
         GAME_LOOP = False
