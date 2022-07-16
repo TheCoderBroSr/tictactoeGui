@@ -21,7 +21,7 @@ BLUE = (75, 23, 103)
 RED = (103, 23, 55)
 
 MARKER = "X"
-GAME_END = -1 #-1 -> Game not end, 1 -> Game has been won/tie, 2 -> Init Game End Sequence
+GAME_END = -1 #-1 -> Game not end, 1 -> Game has been won, 2 -> Init Game End Sequence
 
 while GAME_LOOP:
     for event in pygame.event.get():
@@ -36,9 +36,10 @@ while GAME_LOOP:
             mouse_pos = event.pos
             i, j = boardCoordinates(mouse_pos)
 
-            if board[i][j] == " ":
-                board[i][j] = MARKER
+            if board[i][j] == " ": #Check if board at that pos. is empty
+                board[i][j] = MARKER #Add marker
 
+                #Change Current Marker i.e. Change the player
                 if MARKER == "X":
                     MARKER = "O"
                 else:
@@ -53,18 +54,20 @@ while GAME_LOOP:
             else:
                 w_pos = list(map(displayCoordinates, w_pos))
                 GAME_END = 1
-                print(f"{w_marker} WON!!!")
 
     WIN.fill(BLACK)
     display_board(board, [(RED, BLUE), GREY], MARKER_FONT, WIN)
 
+    #If Game has been won
     if GAME_END == 1:
         draw_line(WIN, [RED, BLUE][MARKER=="X"], w_pos, 15)
+        print(f"{w_marker} WON!!!")
         GAME_END = 2
 
     pygame.display.update()
     clock.tick(FPS)
         
+    #Game end sequence
     if GAME_END == 2:
-        pygame.time.delay(2000)
+        pygame.time.delay(1500)
         GAME_LOOP = False
