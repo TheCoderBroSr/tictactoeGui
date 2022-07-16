@@ -5,7 +5,7 @@ pygame.init()
 board = init_board()
 
 GAME_LOOP = True
-SCREEN_WIDTH = 600
+SCREEN_WIDTH = 230
 SCREEN_HEIGHT = SCREEN_WIDTH
 WIN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption(("TicTacToe GUI"))
@@ -14,6 +14,7 @@ clock = pygame.time.Clock()
 
 MARKER_SIZE = SCREEN_WIDTH//4
 MARKER_FONT = pygame.font.SysFont('Arial', MARKER_SIZE)
+WIN_STRIKE_LENGTH = SCREEN_WIDTH//40
 
 BLACK = (10, 4, 20)
 GREY = (35, 10, 55)
@@ -32,7 +33,7 @@ while GAME_LOOP:
             if event.key == pygame.K_q:
                 end()
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: #Ensures that marker is placed only on left mouseclick
             mouse_pos = event.pos
             i, j = boardCoordinates(mouse_pos)
 
@@ -60,7 +61,7 @@ while GAME_LOOP:
 
     #If Game has been won
     if GAME_END == 1:
-        draw_line(WIN, [RED, BLUE][MARKER=="X"], w_pos, 15)
+        draw_line(WIN, [RED, BLUE][MARKER=="X"], w_pos, WIN_STRIKE_LENGTH)
         print(f"{w_marker} WON!!!")
         GAME_END = 2
 
