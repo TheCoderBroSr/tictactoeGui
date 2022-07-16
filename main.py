@@ -5,7 +5,7 @@ pygame.init()
 board = init_board()
 
 GAME_LOOP = True
-SCREEN_WIDTH = 230
+SCREEN_WIDTH = 500
 SCREEN_HEIGHT = SCREEN_WIDTH
 WIN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption(("TicTacToe GUI"))
