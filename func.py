@@ -53,17 +53,18 @@ def win_check(board:list[list], markers:list):
     Returns winning marker as well as position of winning tiles
     '''
     winning_sequence = ([markers[0]]*3, [markers[1]]*3)
+    offset = 0.5
 
-    #Adding 0.5 to board pos. as offset for when we add the game win lines
+    #Adding offset to board pos. as offset for when we add the game win lines
     for i in range(len(board)):
         #horizontal check
         if board[i] in winning_sequence:
-            return board[i][0], (i + 0.5, 0), (i + 0.5, len(board[i])) #return first element in that row
+            return board[i][0], (i + offset, 0), (i + offset, len(board[i])) #return first element in that row
 
         #vertical check
         col = [board[x][i] for x in range(len(board[i]))] #Get a column
         if col in winning_sequence:
-            return col[0], (0, i+0.5), (len(board[i]), i+0.5) #return first element in that column
+            return col[0], (0, i+offset), (len(board[i]), i+offset) #return first element in that column
 
     #diagonal check
     diag1 = [board[x][x] for x in range(len(board))]
