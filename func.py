@@ -88,7 +88,7 @@ def draw_line(surf:pygame.Surface, color:str, pos:tuple, width:int):
     end_pos = (end_pos[0], end_pos[1])
     pygame.draw.line(surf, color, start_pos, end_pos, width)
 
-def display_board(board:list[list], color:str, MARKER:list, surf:pygame.Surface):
+def display_board(board:list[list], color:str, MARKERS:list, surf:pygame.Surface):
     #color is a list, where in first index is the colors of the markers,
     #and in second is the color of the bars
     height, width = surf.get_height(), surf.get_width() #Getting height and width of surface
@@ -107,13 +107,13 @@ def display_board(board:list[list], color:str, MARKER:list, surf:pygame.Surface)
     for i in range(len(board[0])):
         for j in range(len(board[i])):
             val = board[i][j]
-            color_index = 0
+            marker_index = 0
 
             if val==" ":
                 continue
             
             if val == "O":
-                color_index = 1
+                marker_index = 1
             
-            val = MARKER.render(val, 1, color[0][color_index])
+            val = MARKERS[marker_index]
             surf.blit(val, (gap*j - (val.get_width()//2) + (gap//2), gap*i - (val.get_height()//2) + (gap//2)))

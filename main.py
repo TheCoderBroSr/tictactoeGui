@@ -14,13 +14,20 @@ clock = pygame.time.Clock()
 
 MARKER_SIZE = SCREEN_WIDTH//4
 MARKER_FONT = pygame.font.SysFont('Arial', MARKER_SIZE)
-WIN_STRIKE_LENGTH = SCREEN_WIDTH//40
+MARKER_X = pygame.image.load("assets/X.png")
+MARKER_O = pygame.image.load("assets/O.png")
+WIN_STRIKE_LENGTH = SCREEN_WIDTH//25
 
 BLACK = (10, 4, 20)
 GREY = (35, 10, 55)
-BLUE = (75, 23, 103)
+BLUE = (103, 23, 75)
 RED = (103, 23, 55)
 
+MARKER_SIZE = SCREEN_WIDTH//5
+MARKER_POINTS = (MARKER_SIZE, MARKER_SIZE)
+MARKER_X = pygame.transform.scale(MARKER_X, MARKER_POINTS)
+MARKER_O = pygame.transform.scale(MARKER_O, MARKER_POINTS)
+MARKERS = [MARKER_X, MARKER_O]
 MARKER = "X"
 GAME_END = -1 #-1 -> Game not end, 1 -> Game has been won, 2 -> Init Game End Sequence
 
@@ -57,11 +64,11 @@ while GAME_LOOP:
                 GAME_END = 1
 
     WIN.fill(BLACK)
-    display_board(board, [(RED, BLUE), GREY], MARKER_FONT, WIN)
+    display_board(board, [(RED, BLUE), GREY], MARKERS, WIN)
 
     #If Game has been won
     if GAME_END == 1:
-        draw_line(WIN, [RED, BLUE][MARKER=="X"], w_pos, WIN_STRIKE_LENGTH)
+        draw_line(WIN, [RED, BLUE][MARKER=="O"], w_pos, WIN_STRIKE_LENGTH)
         print(f"{w_marker} WON!!!")
         GAME_END = 2
 
