@@ -91,7 +91,9 @@ def win_check(board:list[list], markers:list):
 def text(surf:pygame.Surface, font:str, pos:tuple, msg:str, size:int, color):
     fontFace = pygame.font.SysFont(font, size)
     renderedFont = fontFace.render(msg, 1, color)
-    surf.blit(renderedFont, pos)
+    x, y = pos
+
+    surf.blit(renderedFont, (x - renderedFont.get_width()//2, y - renderedFont.get_height()//2))
 
 def draw_bars(bars:list, color:str, surf:pygame.Surface):
     for bar in bars:
