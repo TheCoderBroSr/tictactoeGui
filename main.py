@@ -31,6 +31,7 @@ MARKERS = [MARKER_X, MARKER_O]
 MARKER = "X"
 
 GAME_FONT = "assets/game_font.otf"
+GAME_SCORE = [0,0] #X wins, O wins
 GAME_END = -1 #-1 -> Game not end, 1 -> Game has been won, 2 -> Init Game End Sequence
 
 while GAME_LOOP:
@@ -59,14 +60,21 @@ while GAME_LOOP:
 
             if w_marker == -1:
                 if is_board_full(board):
-                    print("Tie")
-                    GAME_END = 0.5
+                    GAME_END = 0.5 #Tie
             else:
                 w_pos = list(map(displayCoordinates, w_pos))
+
+                if w_marker == "X":
+                    GAME_SCORE[0] += 1
+                else:
+                    GAME_SCORE[1] += 1
+
                 GAME_END = 1
 
     WIN.fill(BLACK)
     display_board(board, [(RED, BLUE), GREY], MARKERS, WIN)
+
+    text(WIN, GAME_FONT, (SCREEN_WIDTH//2, 30), f"{GAME_SCORE[0]} - {GAME_SCORE[1]}", 50, (255, 255, 255))
 
     #Done this way to show msg
     if GAME_END == 1.75:
@@ -78,7 +86,6 @@ while GAME_LOOP:
         pygame.time.delay(1000)
         draw_line(WIN, [RED, BLUE][MARKER=="O"], w_pos, WIN_STRIKE_LENGTH)
         text(WIN, GAME_FONT, (SCREEN_WIDTH//2, SCREEN_HEIGHT//2), f"{w_marker} WON", round(SCREEN_WIDTH/2.65), (100, 30, 165))
-        print(f"{w_marker} WON!!!")
         GAME_END = 2
     
     if GAME_END == 0.5:
@@ -96,4 +103,5 @@ while GAME_LOOP:
     #Game end sequence
     if GAME_END == 2:
         pygame.time.delay(1750)
-        GAME_LOOP = False
+        GAME_END = False
+        board = init_board()
