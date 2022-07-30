@@ -40,6 +40,15 @@ def displayCoordinates(pos:tuple) -> tuple:
 
     return (y*gap, x*gap)
 
+def distance_points_resolution(a:tuple, b:tuple) -> tuple:
+    '''
+    Returns the x and y distance of the points from a to b
+    '''
+    x1, y1 = a
+    x2, y2 = b
+
+    return (x1 - x2), (y1 - y2)
+
 def is_board_full(board : list[list]) -> bool:
     '''
     Checks if each row in the board is full
