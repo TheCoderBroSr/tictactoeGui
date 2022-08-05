@@ -105,3 +105,4 @@ while GAME_LOOP:
         pygame.time.delay(1750)
         GAME_END = False
         board = init_board()
+        MARKER = "X"
